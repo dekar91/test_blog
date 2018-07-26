@@ -232,8 +232,7 @@ php:
             - json
             - tokenizer
         pear: {  }
-        pecl:
-            - mongodb
+        pecl: {  }
     ini:
         display_errors: 'On'
         error_reporting: '-1'
