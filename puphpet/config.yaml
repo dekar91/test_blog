@@ -226,8 +226,14 @@ php:
             - cli
             - intl
             - xml
+            - mbstring
+            - mysql
+            - ctype
+            - json
+            - tokenizer
         pear: {  }
-        pecl: {  }
+        pecl:
+            - mongodb
     ini:
         display_errors: 'On'
         error_reporting: '-1'
