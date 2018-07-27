@@ -38,15 +38,3 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 .vagrant/
-html/
-puphpet/files/dot/
-puphpet/puppet/modules/augeasproviders_core/augeas/
-puphpet/puppet/modules/augeasproviders_sysctl/spec/fixtures/manifests/
-puphpet/puppet/modules/augeasproviders_sysctl/spec/fixtures/modules/
-puphpet/puppet/modules/debconf/spec/fixtures/
-puphpet/puppet/modules/epel/spec/fixtures/
-puphpet/puppet/modules/epel/spec/functions/
-puphpet/puppet/modules/epel/spec/hosts/
-puphpet/puppet/modules/git/junit/
-puphpet/puppet/modules/sysctl/spec/fixtures/
-teestb/
