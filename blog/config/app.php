@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Test blog'),
 
     /*
     |--------------------------------------------------------------------------
@@ -146,6 +146,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Gaaarfild\LaravelConf\LaravelConfServiceProvider::class,
+        Gaaarfild\LaravelNotifications\LaravelNotificationsServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -159,6 +161,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \Jenssegers\Mongodb\MongodbServiceProvider::class
 
     ],
 

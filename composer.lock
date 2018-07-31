@@ -9,16 +9,16 @@
     "packages-dev": [
         {
             "name": "laravel/homestead",
-            "version": "v7.12.0",
+            "version": "v7.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/homestead.git",
-                "reference": "393c4bdc4972af1355dc91b3c28b8a2f1bdbd349"
+                "reference": "c4bd3e5e36b128838c769dd34ae38eca4bff332b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/homestead/zipball/393c4bdc4972af1355dc91b3c28b8a2f1bdbd349",
-                "reference": "393c4bdc4972af1355dc91b3c28b8a2f1bdbd349",
+                "url": "https://api.github.com/repos/laravel/homestead/zipball/c4bd3e5e36b128838c769dd34ae38eca4bff332b",
+                "reference": "c4bd3e5e36b128838c769dd34ae38eca4bff332b",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 }
             ],
             "description": "A virtual machine for web artisans.",
-            "time": "2018-07-14T01:02:53+00:00"
+            "time": "2018-07-28T17:14:34+00:00"
         },
         {
             "name": "symfony/console",
