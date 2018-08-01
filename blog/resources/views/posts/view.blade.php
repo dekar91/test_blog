@@ -1,11 +1,12 @@
-@extends('site.main')
+@extends('layouts.app')
+@section('pageTitle', $post->title )
 
-@section('body')
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-9">
                 <div class="post-body">
-                    <img src="{{ starts_with($post->img, ['http://', 'https://']) ? '' : '/upload/' }}{{ $post->img }}" alt="" style="max-width: 100%;" class="post-image">
+                    {{--<img src="{{ starts_with($post->img, ['http://', 'https://']) ? '' : '/upload/' }}{{ $post->img }}" alt="" style="max-width: 100%;" class="post-image">--}}
                     <article>
                         <div class=" post-content">
                             <div class="">
@@ -20,39 +21,15 @@
                                 <hr />
                                 <div>
                                     <div>
-                                        <i class="fa fa-square"></i>
-
-                                        <a href="{{ route('category', ['slug' => $post->category->slug]) }}">{{ $post->category->title }}</a>
-                                    </div>
-                                    <div>
                                         <i class="fa fa-clock-o"></i>
-                                        Опубликовано: {{ hdate($post->published_at) }}
-                                        <small class="text-muted">({{ date('d.m.Y', strtotime($post->published_at)) }})</small>
+                                        Published: {{ date('Y-m-d H:i', $post->ts) }} by {{ $post->user->name }}
                                     </div>
-                                    <div>
-                                        Автор: {{ $post->user->name }}
-                                    </div>
-                                    <div>
-                                        @include('site.partials.tags-list', ['tags' => $post->tags])
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class="">
-                                @include('site.partials.related', ['post' => $post])
                             </div>
                         </div>
                     </article>
-                    @include('site.partials.comments')
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-3">
-                @include('site.partials.categories-menu')
             </div>
         </div>
     </div>
-@stop
-
-@section('meta')
-    <link rel="author" href="{{ $post->user->name or '' }}" />
-@stop
+@endsection

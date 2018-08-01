@@ -12,20 +12,10 @@ use Illuminate\Support\Facades\Route, Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/', 'PostController@index')->name('home');
-Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::get('/post/view/{slug}', 'PostController@view')->name('post-view');
-Route::match(['get', 'post'],'/post/create', 'PostController@create')->name('post-create');
 
-//Route::get('add','PostController@create');
-//Route::post('add','PostController@store');
-//Route::get('car','PostController@index');
-//Route::get('edit/{id}','PostController@edit');
-//Route::post('edit/{id}','PostController@update');
-//Route::delete('{id}','PostController@destroy');
+Route::get('/post/view/{slug}', 'PostController@view')->name('post-view');
+Route::get('/post/delete/{slug}', 'PostController@delete')->name('post-delete')->middleware('auth');
+Route::match(['get', 'post'],'/post/create', 'PostController@create')->name('post-create')->middleware('auth');

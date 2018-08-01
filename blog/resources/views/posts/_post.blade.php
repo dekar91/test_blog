@@ -1,28 +1,29 @@
-<div class="post">
-    <a href="{{ route('view', ['slug' => $post->slug]) }}">
-        //
-    </a>
+<div class="post col-sm-6">
+    {{--<a href="{{ route('post-view', ['slug' => $post->slug]) }}"> image must be here--}}
+    {{--</a>--}}
     <div class="row">
         <div class="col-lg-12">
             <div class="post-content">
                 <h2 class="post-title">
-                    <a href="{{ route('view', ['slug' => $post->slug]) }}"> {{ $post->title }}</a>
+                    <a href="{{ route('post-view', ['slug' => $post->slug]) }}"> {{ $post->title }}</a>
                 </h2>
-                <hr />
                 <div class="row">
-                        <div>
+                        <div class="col-sm-12">
                             <i class="fa fa-clock-o"></i>
-                            {{--<span class="text-muted">Опубликовано:</span>--}}
-                            {{--{{ hdate($post->created) }}--}}
+                            <span class="text-muted">Published:</span>
                             <small class="text-muted">({{ date('d.m.Y', $post->ts) }})</small>
-                        {{--</div>--}}
+                        </div>
+                    <div class="post-annotation col-sm-12">{{ strip_tags(substr($post->content,0, 40)) }}</div>
                         <div>
-{{--                            @include('site.partials.tags-list', ['tags' => $post->tags])--}}
+                            @if($post->canDelete())
+                                <a href="{{ route('post-delete', ['slug' => $post->slug]) }}" class="post-delete">Delete post</a>
+                                <a href="{{ route('post-create', ['postId' => $post->id]) }}" class="post-delete">Edit post</a>
+                                @endif
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>
+    <hr />
 </div>

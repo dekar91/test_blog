@@ -21,55 +21,47 @@ public function __construct()
     public function view($slug)
     {
         $post = Post::getBySlug($slug);
-        var_dump($post);
-        view()->share('seo_title', $post->seo_title);
-        view()->share('seo_description', $post->seo_description);
-        view()->share('seo_keywords', $post->seo_keywords);
-        Title::prepend($post->seo_title);
-        try {
-            if ($post->status == 'active') {
-                $post->increment('views');
-            }
-        } catch (QueryException $e) {
-            //This is just for demo purposes.
-        }
-        return view('site.posts.view', ['post' => $post]);
-    }
-    public function tag($tag)
-    {
-        Title::prepend('Тэг: '.$tag);
-        $data = [
-            'posts' => Posts::i()->getPostsByTag($tag),
-            'title' => Title::renderr(' : ', true),
-            'q' => '',
-        ];
-        view()->share('seo_title', $data['title']);
-        return view('site.posts.index', $data);
+        return view('posts.view', ['post' => $post]);
     }
 
     public function create(Request $request, $postId = null)
     {
+        $this->middleware('auth');
+
         $post = Post::findOrNew($postId);
 
-        if (empty($post)) {
-            redirect()->back()->withInput();
-        }
+        if($request->method() == Request::METHOD_POST)
+        {
+            $this->validate($request, [
+                'title' => 'required|unique:mongodb.posts|max:255',
+                'content' => 'required',
+            ]);
 
-        $post->user_id = auth()->user()->id ?? null;
-        $post->content = $request->get('content');
-        $post->title = $request->get('title');
-        $post->ts = time();
-        $post->save();
+
+            if (empty($post)) {
+                redirect()->back()->withInput();
+            }
+
+            $post->user_id = auth()->user()->id ?? null;
+            $post->content = $request->get('content');
+            $post->title = $request->get('title');
+            $post->ts = time();
+            $post->slug = str_slug($post->title, '_');;
+            $post->save();
+
+            return redirect(route('post-view', ['slug'=> $post->slug]));
+        };
 
         return view('posts.create', ['post' => $post]);
     }
-    
-    public function remove($slug = '')
+
+    public function delete($slug = '')
     {
+
         $post = Post::getBySlug($slug);
         $user = auth()->user();
 
-        if($post && ($user && ($post->user_id == $user->id))) {
+        if($post->canDelete($user)) {
             $post->delete();
             return true;
         }

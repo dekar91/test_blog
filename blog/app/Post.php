@@ -9,7 +9,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
  * @property  int $user_id
  * @property int $ts
  * @property  string $content
- * @property \string $keywords
+ * @string $slug
  */
 class Post extends Eloquent
 {
@@ -35,5 +35,22 @@ class Post extends Eloquent
         }
 
         return $post;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+//        return User::query()->find($this->user_id);
+    }
+
+    public function canDelete($user = null)
+    {
+        if(!$user) {
+            $user = auth()->user();
+        }
+
+        return $user && $user->id == $this->user_id;
+
+
     }
 }
