@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="post-content">
                 <h2 class="post-title">
-                    <a href="{{ route('post-view', ['slug' => $post->slug]) }}"> {{ $post->title }}</a>
+                    <a href="{{ route('post-view', ['slug' => $post->slug]) }}" class="post-link"> {{ $post->title }}</a>
                 </h2>
                 <div class="row">
                         <div class="col-sm-12">

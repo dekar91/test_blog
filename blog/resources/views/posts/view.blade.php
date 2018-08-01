@@ -10,7 +10,7 @@
                     <article>
                         <div class=" post-content">
                             <div class="">
-                                <h1 class="">{{ $post->title }}</h1>
+                                <h1 class="post-title">{{ $post->title }}</h1>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="">

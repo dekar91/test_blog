@@ -27,7 +27,7 @@ class PostTest extends TestCase
         }
 
         $this->assertTrue($postModelBySlug->delete(), 'Model delete() returns true');
-        $this->assertDatabaseMissing($postModelBySlug->getTable(), ['slug' => $testCase['slug']], $postModelBySlug->getConnectionName());
+        $this->assertDatabaseHas($postModelBySlug->getTable(), ['slug' => $testCase['slug']], $postModelBySlug->getConnectionName());
 
 
         $this->assertEmpty(Post::getBySlug($testCase['slug']), 'Post has removed correctly');
