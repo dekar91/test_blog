@@ -6,10 +6,14 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Jenssegers\Mongodb\Eloquent\Model;
 
 /**
- * @property  int $user_id
- * @property int $ts
- * @property  string $content
- * @string $slug
+ * @property-read int $user_id
+ * @property-read int $ts
+ * @property string $tile
+ * @property string $content
+ * @property string $slug
+ * @property-read string $url
+ * @property-read string $deleteUrl
+ * @property-read string $editUrl
  */
 class Post extends Eloquent
 {
@@ -43,14 +47,30 @@ class Post extends Eloquent
 //        return User::query()->find($this->user_id);
     }
 
-    public function canDelete($user = null)
+    public function getUrlAttribute()
+    {
+        return route('post-view', ['slug' => $this->slug]);
+
+    }
+
+    public function getDeleteUrlAttribute()
+    {
+        return route('post-delete', ['slug' => $this->slug]);
+
+    }
+
+    public function getEditUrlAttribute()
+    {
+        return route('post-create', ['slug' => $this->slug]);
+
+    }
+
+    public function getHasAccessAttribute($user = null):bool
     {
         if(!$user) {
             $user = auth()->user();
         }
 
         return $user && $user->id == $this->user_id;
-
-
     }
 }

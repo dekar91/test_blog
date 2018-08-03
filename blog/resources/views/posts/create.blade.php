@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Create Post') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('post-create', ['postId' => $post->id ]) }}"
+                        <form method="POST" action="{{ $post->editUrl }}"
                               aria-label="{{ __('Create new post') }}">
                             @csrf
 

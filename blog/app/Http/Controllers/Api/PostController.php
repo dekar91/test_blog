@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Post;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Post;
 
 class PostController extends Controller
 {
-public function __construct()
-{
-}
+    public function __construct()
+    {
+    }
+
     public function index()
     {
         $posts = Post::all();
-        return view('posts.index', ['posts' => $posts]);
+
+        return PostResource::collection($posts);
     }
 
     public function view($slug)
     {
         $post = Post::getBySlug($slug);
-        return view('posts.view', ['post' => $post]);
+        return new PostResource($post);
     }
 
     public function create(Request $request, $postId = null)
@@ -30,7 +33,7 @@ public function __construct()
 
         if($request->method() == Request::METHOD_POST)
         {
-            $this->validate($request, [
+            $post = $this->validate($request, [
                 'title' => 'required|unique:mongodb.posts|max:255',
                 'content' => 'required',
             ]);
@@ -47,7 +50,8 @@ public function __construct()
             $post->slug = str_slug($post->title, '_');;
             $post->save();
 
-            return redirect($post->url);
+            return
+                redirect(route('post-view', ['slug'=> $post->slug]));
         };
 
         return view('posts.create', ['post' => $post]);

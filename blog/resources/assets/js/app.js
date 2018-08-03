@@ -1,4 +1,7 @@
-
+/** TODO:
+ * make routes for Vue to avoid page reloading while opening post
+ * Create Component for post editing
+ */
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -15,7 +18,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('posts', require('./components/Posts.vue'));
+Vue.component('post', require('./components/Post.vue'));
 
 const app = new Vue({
     el: '#app'

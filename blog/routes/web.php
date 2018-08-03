@@ -12,7 +12,15 @@ use Illuminate\Support\Facades\Route, Illuminate\Support\Facades\Auth;
 |
 */
 
+/** TODO:
+ * Separate API and site to different routes posts -> api/posts.
+ * Make APi REST-looking: post, post/update, post/delete
+ * Create resource for Auth
+ */
+
 Auth::routes();
+
+Route::resource('post', 'Api\PostController')->only(['index', 'view', 'create', 'delete']);
 
 Route::get('/', 'PostController@index')->name('home');
 
