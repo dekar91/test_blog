@@ -5,7 +5,7 @@ This is the first attempt to write something on Laravel.
 ## Installation
 
 1. This blog is tested with homestead machine. You need [Vagrant](https://www.vagrantup.com/) and [VirtualBoox](https://www.virtualbox.org). You may use other VM, but it was not tested on them.
-3. configure your hometstead.yaml:
+2. configure your hometstead.yaml:
 ````
 ip: 192.168.10.10
 memory: 2048
@@ -29,8 +29,7 @@ hostname: test-blog
 mongodb: true
 
 ````
-3. Then just run `` vagrant up `` inside project directory.
-
+3. Then just run `` composer install && vagrant up `` inside project directory.
 4. Add ``192.168.10.10  testb.local`` to your hosts file
 5. Go inside  by `` vagrant ssh `` and run ``composer install`` inside blog directory.
 6. *.env* file remains standard for homestead
